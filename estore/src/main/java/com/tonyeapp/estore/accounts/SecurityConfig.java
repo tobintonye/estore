@@ -37,10 +37,19 @@ public class SecurityConfig {
             "/auth/login", "/auth/refresh-token", "/auth/logout").permitAll()
             
             .requestMatchers("/auth/user/**").hasRole("USER")
-            .requestMatchers("/auth/admin/**").hasRole("ADMIN")
+            .requestMatchers("/auth/admin/**", "/admin/**").hasRole("ADMIN")
+            
+            // Public product viewing - any authenticated user
+            .requestMatchers("/products", "/products/**").authenticated()
+             
+            .requestMatchers("/cart", "/cart/**").authenticated()
 
-             // All other endpoints require authentication
-                .anyRequest().authenticated()
+            .requestMatchers("/orders", "/orders/**").authenticated()
+
+            .requestMatchers("/payments", "/payments/**").authenticated()
+             
+            // All other endpoints require authentication
+            .anyRequest().authenticated()
          )
             
          // Stateless session (required for JWT)

@@ -29,12 +29,6 @@ public class UserController {
         return "Welcome to estore";
     }
 
-  @GetMapping("/admin/dashboard")
-    public String adminDashboard() {
-        return "Welcome to the Admin Dashboard!";
-    }
-   
-
     @PostMapping("/register")
     public String register(@RequestBody UserInfo userInfo) {
         return service.addUser(userInfo);
